@@ -1,5 +1,5 @@
 version: '2' # specify docker-compose version
-# Define the services/containers to be run
+# Define the services/containers to be run 
 services:
   pgDatabase: # name of the third service - database
     image: postgres:9.5 # specify image to build container from
