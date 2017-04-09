@@ -1,0 +1,19 @@
+version: '2' # specify docker-compose version
+# Define the services/containers to be run
+services:
+  pgDatabase: # name of the third service - database
+    image: postgres:9.5 # specify image to build container from
+    volumes_from: #линк на data volumes container
+      - pg_dbdata
+    ports: # проброс портов на локальную машину
+      - "5432:5432" 
+    environment:
+      POSTGRES_PASSWORD: 4198b04a1e2e7684ba887796e92e0d9a
+      POSTGRES_USER: postgres
+      PGDATA : /var/lib/postgresql/data/pgdata # в доке рекомендуется субдиректория - переопределим, раз надо
+ 
+  pg_dbdata: #data volumes container для хранения данных посгреса
+    image: busybox # вроде как образ легче некуда
+    volumes: # каталог контейнера - сопадает с PGDATA выше
+    - /var/lib/postgresql/data/pgdata
+    command: "true" # не понял, но в разных примерах было - видимо зачем-то надо
